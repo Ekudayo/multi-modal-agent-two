@@ -4,7 +4,8 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { useRef, useState } from "react";
 import Image from "next/image";
-// import { PromptInput } from "@/components/ui/prompt-input";
+
+
 async function convertFilesToDataURLs(files: FileList) {
   return Promise.all(
     Array.from(files).map(
@@ -39,7 +40,7 @@ export default function Chat() {
       api: "/api/chat",
     }),
   });
-
+  // "flex flex-col mt-2.5 mb-8.5 bg-amber-200 w-full max-w-md py-24 mx-auto stretch"
   return (
     <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
       {messages.map((m) => (
@@ -75,9 +76,10 @@ export default function Chat() {
           })}
         </div>
       ))}
-
+      {/* fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl space-y-2 */}
+      {/* "fixed bottom-0 w-full max-w-md p-2 mb-8 mt-8 bg-pink-900 border border-gray-300 rounded shadow-xl space-y-2" */}
       <form
-        className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl space-y-2"
+        className="relative bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl space-y-2"
         onSubmit={async (event) => {
           event.preventDefault();
 
@@ -111,12 +113,18 @@ export default function Chat() {
           multiple
           ref={fileInputRef}
         />
-        <input
-          className="w-full p-2"
-          value={input}
-          placeholder="Say something..."
-          onChange={(e) => setInput(e.target.value)}
-        />
+        <div className=" flex flex-row justify-between items-center space-x-2">
+          <input
+            className="w-6rem p-2"
+            value={input}
+            placeholder="Say something..."
+            onChange={(e) => setInput(e.target.value)}
+          />
+
+          <button type="submit" className="bg-amber-500 text-white p-2 rounded">
+            Send
+          </button>
+        </div>
       </form>
     </div>
   );
